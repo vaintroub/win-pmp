@@ -46,3 +46,14 @@ Interpreting the results
 
 
 That's it. 
+
+
+# How it works
+
+The profiling consists of 3 different stages
+1. Taking minidumps. Every couple of seconds (-sleep parameter), a probe is taken . A probe is a [minidump](https://msdn.microsoft.com/en-us/library/windows/desktop/ms680369(v=vs.85).aspx) of the process, and it is named named 1.dmp,2.dmp etc
+Taking minidump is very cheap,e.g the performance of the process that is being profiled is not affected by profiling.
+
+2. running cdb on all minidumps to get the callstacks (raw output is stored in cdb.log file)
+3. cdb.log is parsed, callstacks count is aggregated, and the output is written to the stdout
+

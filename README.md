@@ -28,7 +28,7 @@ It will produce the output similar to this
 
 ```
 1000 GetQueuedCompletionStatus,os_aio_windows_handler,os_aio_handler,fil_aio_wait,io_handler_thread)
-3G00 SleepConditionVariableCS,os_event::wait,os_event::wait_low,srv_resume_thread,srv_worker_thread
+300 SleepConditionVariableCS,os_event::wait,os_event::wait_low,srv_resume_thread,srv_worker_thread
 ...
 38 WriteFile,vio_write_pipe,net_real_write,net_flush,net_send_ok,net_send_eof,Protocol::end_statement,dispatch_command..
 19 inline_mysql_mutex_lock,Table_cache_instance::lock_and_check_contention,tc_acquire_table,tdc_acquire_share,open_table.
@@ -41,7 +41,7 @@ ess_table,open_tables,open_and_lock_tables
 ```
 
 Interpreting the results
-1. Exclude threads that almost always sleep( e.g io_handler_thread here, or serv_worker_thread)
+1. Exclude threads that almost always sleep( e.g io_handler_thread here, or srv_worker_thread)
 2. Look into mutex or rwlock contention (in this example, Table_cache and MDL locks are relatively hot ones). 
 
 
